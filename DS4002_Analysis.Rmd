@@ -1,0 +1,77 @@
+---
+title: "Test_Schrute"
+output: html_document
+date: "2024-01-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+install.packages("schrute")
+library(schrute)
+library(dplyr)
+
+
+mydata <- schrute::theoffice
+
+mydata <- filter(mydata, season == 3, character == 'Michael')
+
+value <- c()
+
+for (i in 1:24) {
+  value[i] <- nrow(mydata[mydata$episode == i, ])
+}
+
+
+new_df <- mydata %>%
+  group_by(episode) %>%
+  summarise(
+    lines_per_episode = n(),
+    imdb_rating = first(imdb_rating)
+  )
+
+plot(new_df$lines_per_episode, new_df$imdb_rating,
+     xlab = "Lines per Episode",
+     ylab = "IMDB Rating ",
+     main = "Scatterplot of IMDB Rating vs. Lines per Episode")
+
+
+library(ggplot2)
+
+
+# ggplot2 scatterplot with a graph border
+ggplot(new_df, aes(x = lines_per_episode, y = imdb_rating)) +
+  geom_point() +  # Add points for the scatterplot
+  labs(x = "Lines per Episode", 
+       y = "IMDb Rating", 
+       title = "Scatterplot of IMDb Rating vs. Lines per Episode") +
+  theme_minimal() +  # Use a minimal theme for aesthetics
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=2)) # Adds a border around the plot
+  
+
+
+print(new_df)
+  
+
+ 
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
