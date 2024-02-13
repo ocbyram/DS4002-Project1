@@ -1,0 +1,71 @@
+---
+title: "Test_Schrute"
+output: html_document
+date: "2024-01-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(schrute)
+library(dplyr)
+
+
+mydata <- schrute::theoffice
+
+mydata <- filter(mydata, season == c(1,2,3,4,5,6), character == 'Michael')
+
+value <- c()
+
+for (i in 1:24) {
+  value[i] <- nrow(mydata[mydata$episode == i, ])
+}
+
+
+new_df <- mydata %>%
+  group_by(episode_name) %>%
+  summarise(
+    lines_per_episode = n(),
+    imdb_rating = first(imdb_rating)
+  )
+
+plot(new_df$lines_per_episode, new_df$imdb_rating,
+     xlab = "Lines per Episode",
+     ylab = "IMDB Rating ",
+     main = "Scatterplot of IMDB Rating vs. Lines per Episode")
+
+
+library(ggplot2)
+
+
+# ggplot2 scatterplot with a graph border
+ggplot(new_df, aes(x = lines_per_episode, y = imdb_rating)) +
+  geom_point() +  # Add points for the scatterplot
+  labs(x = "Lines per Episode", 
+       y = "IMDb Rating", 
+       title = "Scatterplot of IMDb Rating vs. Lines per Episode") +
+  theme_minimal() +  # Use a minimal theme for aesthetics
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=2)) # Adds a border around the plot
+  
+
+
+print(new_df)
+  
+
+ 
+```
+
+```{r}
+sample.data<-sample.int(nrow(new_df), floor(.50*nrow(new_df)), replace = F)
+train<-new_df[sample.data, ]
+test<-new_df[-sample.data, ]
+
+result_train<-lm(imdb_rating~lines_per_episode, data=train)
+train_pred <- predict(result_train)
+
+result_test<-lm(imdb_rating~lines_per_episode, data=test)
+test_pred = predict(result_test)
+
+rmse_test = rmse(test_pred, test$imdb_rating)
+rmse_train = rmse(train_pred, train$imdb_rating)
+
+```
