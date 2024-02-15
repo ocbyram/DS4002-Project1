@@ -12,6 +12,7 @@ Project 1 Analysis for DS 4002
     - [Git](https://git-scm.com/)
 - Hardware: Analyses were run on the following Hardware and Operating systems
     - Dell Latitude 7480 (Ubutnu 22.04.2)
+    - Windows Surface
 - Dependencies: 
     - [Schrute](https://github.com/bradlindblad/schrute 
 ) 
