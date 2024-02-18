@@ -3,8 +3,8 @@ title: "Test_Schrute"
 output: html_document
 date: "2024-01-30"
 ---
-
-# How well each office character is an indicator of the episodes rating
+#This file performs an analysis to see how well each office character is an indicator of the episodes rating. There are comments 
+#throughout the code to ensure ease when replicating this project. 
 ```{r setup, echo=FALSE}
 set.seed(0)
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
