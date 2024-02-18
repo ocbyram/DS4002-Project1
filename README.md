@@ -38,5 +38,14 @@ Project
 Before starting ensure that you have all the required software installed as outlined in [Section 1](#section-1:-software-and-platform). We also
 encourage use of either Mac, Windows or Ubuntu, as that is what the analysis was tested on, although other operating systems may work. 
 
+Step 1:
+Open your R software and import the 'Schrute' package. There is a dataframe within the package titled 'theoffice'. This is the dataframe that we manipulated to obtain our results. 
 
-***In this section, you should give explicit step-by-step instructions to reproduce the Results of your study. These instructions should be written in straightforward plain English, but they must be concise, but detailed and precise enough, to make it possible for an interested user to reproduce your results without much difficulty. N.B. This section will be crucial for the CS1 assignment, where you'll be required to reproduce the results of other groups. Therefore, make sure to explain this section thoroughly.*** 
+Step 2:
+Ensure that your seed is set to 0 (set.seed(0)). This will guarantee you identical results to ours. 
+
+Step 3:
+Download the code that we have uploaded to the 'SCRIPTS' folder, and run the file. It should be seamless provided that you have already installed Schrute, TidyVerse, and ggplot2. It will output the same results as us. 
+
+Step 4:
+You can analyze these results in your own way, or look through our presentation to see the conclusions that we drew. 
